@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
-  "identifier": "@dev/another-skill",
   "version": "0.0.1",
-  "name": "Another Skill",
-  "description": "Description of Another Skill.",
+  "name": "Parental Leave Tutorial",
+  "description": "This is the Skill from the tutorial",
+  "identifier": "@matterway/parental-leave-tutorial-skill",
   "icon": "icon.png",
   "background_script": "background.js",
   "content_script": "content.js",

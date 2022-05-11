@@ -16,7 +16,7 @@ export async function someNextActionStep(ctx: Context, data: {
   const {browser, page, render} = ctx;
 
   // Write your code here. Remove when done
-  await pause();
+  // await pause();
 
   // Change this to point to your next step
   return await successStep(ctx);
