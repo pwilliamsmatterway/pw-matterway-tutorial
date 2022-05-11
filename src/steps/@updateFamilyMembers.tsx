@@ -1,36 +1,45 @@
-import { useSkillDebugger } from "@matterway/skill-debugger";
-import { Context } from "library/context";
-import { ChildData, EmployeeData } from "shared/types";
+import { Context } from 'library/context';
+import { START_URL } from 'shared/constants';
+import {
+  BIRTH_DATE,
+  BIRTH_NAME,
+  EMPLOYEE_ID,
+  FIRST_NAME,
+  LAST_NAME,
+  MEMBER_TYPE,
+  REFERENCE_PERSON_NUMBER,
+  TRANSACTION_ID,
+} from 'shared/selectors';
+import { ChildData, EmployeeData } from 'shared/types';
 
 export async function updateFamilyMembersStep(
-    ctx: Context,
-    data: {
-      employee: EmployeeData;
-      child: ChildData;
-    },
-  ) {
-    console.log('step: updateFamilyMembersStep');
-    const pause = useSkillDebugger(ctx.signal);
-    const {page} = ctx;
-  
-    // Navigate
-    await page.goto('https://employee-master-data.demo.matterway.io');
-    await page.waitForSelector('#employee-id');
-    await page.type('#employee-id', `${data.employee.id}\n`);
-  
-    // Open transaction
-    await page.waitForSelector('#transaction-id');
-    await page.type('#transaction-id', '0021\n');
-  
-    // Fill form
-    await page.waitForSelector('[name="memberType"]');
-    await page.select('[name="memberType"]', '2');
-    await page.type('[name="firstName"]', data.child.firstName);
-    await page.type('[name="lastName"]', data.child.lastName);
-    await page.type('[name="birthDate"]', data.child.birthDate);
-    await page.type('[name="birthName"]', data.child.lastName);
-    await page.type('[name="referencePersonNumber"]', data.employee.id);
-  
-    // Save and submit
-    await page.click('button'); // FIXME
-  }
+  ctx: Context,
+  data: {
+    employee: EmployeeData;
+    child: ChildData;
+  },
+) {
+  console.log('step: updateFamilyMembersStep');
+  const { page } = ctx;
+
+  // Navigate
+  await page.goto(START_URL);
+  await page.waitForSelector(EMPLOYEE_ID);
+  await page.type(EMPLOYEE_ID, `${data.employee.id}\n`);
+
+  // Open transaction
+  await page.waitForSelector(TRANSACTION_ID);
+  await page.type(TRANSACTION_ID, '0021\n');
+
+  // Fill form
+  await page.waitForSelector(MEMBER_TYPE);
+  await page.select(MEMBER_TYPE, '2');
+  await page.type(FIRST_NAME, data.child.firstName);
+  await page.type(LAST_NAME, data.child.lastName);
+  await page.type(BIRTH_DATE, data.child.birthDate);
+  await page.type(BIRTH_NAME, data.child.lastName);
+  await page.type(REFERENCE_PERSON_NUMBER, data.employee.id);
+
+  // Save and submit
+  await page.click('button'); // FIXME
+}

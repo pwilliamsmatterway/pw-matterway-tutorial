@@ -1,2 +1,2 @@
 // Keep shared constants here
-export const MY_SITE_URL = 'https://example.org';
+export const START_URL = 'https://employee-master-data.demo.matterway.io';

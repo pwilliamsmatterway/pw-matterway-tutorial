@@ -15,12 +15,9 @@ export async function updateMasterDataStep(
     child: ChildData;
   },
 ) {
-
   // We connect to agent
   const agent = await connectToAgent(ctx.signal, {
     createAgentConnection: useAgentConnectionFactory(),
-    // browserLocationPathForDebugging:
-    //   '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
   });
 
   await runJobsWithProgressList(
@@ -29,14 +26,14 @@ export async function updateMasterDataStep(
       {
         title: 'Updating Family Members...',
         handler: async (ctx) => {
-          const bgCtx = {...ctx, browser: agent, page: await agent.newPage()};
+          const bgCtx = { ...ctx, browser: agent, page: await agent.newPage() };
           await updateFamilyMembersStep(bgCtx, data);
         },
       },
       {
         title: 'Updating Absence Quota...',
         handler: async (ctx) => {
-          const bgCtx = {...ctx, browser: agent, page: await agent.newPage()};
+          const bgCtx = { ...ctx, browser: agent, page: await agent.newPage() };
           await updateAbsenceQuotaStep(bgCtx, data);
         },
       },
@@ -48,7 +45,7 @@ export async function updateMasterDataStep(
 
   await agent.disconnect();
 
-  return await successStep(ctx)
+  return await successStep(ctx);
 
   // ...
 }

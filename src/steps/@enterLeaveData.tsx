@@ -1,36 +1,26 @@
-import { useSkillDebugger } from '@matterway/skill-debugger';
 import { Context } from 'library/context';
 import { showProgress } from 'library/progress';
+import { IMAGE_VIEWER_OVERLAY, OPEN_ATTACHMENT_SELECTOR } from 'shared/selectors';
 import { ChildData, EmployeeData, LeaveData } from 'shared/types';
-import { successStep } from './@success';
 import { updateMasterDataStep } from './@updateMasterDataStep';
 
 export async function enterLeaveDataStep(
   ctx: Context,
   data: {
-    employee: EmployeeData,
-    leave: LeaveData 
-    child: ChildData
+    employee: EmployeeData;
+    leave: LeaveData;
+    child: ChildData;
   },
 ) {
   console.log('step: enterLeaveDataStep');
-  const { page, render, signal } = ctx;
-  const pause = useSkillDebugger(signal);
-
+  const { page } = ctx;
   showProgress(ctx, 'Open the leave request...');
-  await page.click('.open-attachment:nth-child(1)');
-
-  // <- Here is a placeholder where we'll show a form later ->
+  await page.click(OPEN_ATTACHMENT_SELECTOR);
 
   showProgress(ctx, 'Close the leave request...');
-  await page.click('#image-viewer-overlay');
-
-
-  // Write your code here
-  // await pause();
+  await page.click(IMAGE_VIEWER_OVERLAY);
 
   const { employee, leave, child } = data;
-  // Jump to your next step here
-  return await updateMasterDataStep(ctx, {employee, leave, child});
+
+  return await updateMasterDataStep(ctx, { employee, leave, child });
 }
- 

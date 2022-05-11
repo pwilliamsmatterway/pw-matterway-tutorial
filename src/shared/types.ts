@@ -1,12 +1,12 @@
-import { AnyStyledComponent } from "styled-components";
+import { AnyStyledComponent } from 'styled-components';
 
 export type Resolver<T> = (value: T) => void;
 
 // Export types used across your skills here
 export interface SkillData {
-  employeeId: string,
-  employeeFirstName: string,
-  employeeLastName: string,
+  employeeId: string;
+  employeeFirstName: string;
+  employeeLastName: string;
 }
 
 export interface EmployeeData {
@@ -15,12 +15,12 @@ export interface EmployeeData {
 }
 
 export interface LeaveData {
-  startDate: string,
-  endDate: string
+  startDate: string;
+  endDate: string;
 }
 
 export interface ChildData {
-  firstName: string,
-  lastName: string,
-  birthDate: string,
+  firstName: string;
+  lastName: string;
+  birthDate: string;
 }

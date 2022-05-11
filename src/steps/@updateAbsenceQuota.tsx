@@ -1,5 +1,6 @@
-import { useSkillDebugger } from '@matterway/skill-debugger';
 import { Context } from 'library/context';
+import { START_URL } from 'shared/constants';
+import { EMPLOYEE_ID, END_DATE_INPUT, START_DATE_INPUT, TRANSACTION_ID } from 'shared/selectors';
 import { EmployeeData, LeaveData } from 'shared/types';
 
 export async function updateAbsenceQuotaStep(
@@ -10,22 +11,21 @@ export async function updateAbsenceQuotaStep(
   },
 ) {
   console.log('step: updateAbsenceQuotaStep');
-  const pause = useSkillDebugger(ctx.signal);
-  const {page} = ctx;
+  const { page } = ctx;
 
   // Navigate
-  await page.goto('https://employee-master-data.demo.matterway.io');
-  await page.waitForSelector('#employee-id');
-  await page.type('#employee-id', `${data.employee.id}\n`);
+  await page.goto(START_URL);
+  await page.waitForSelector(EMPLOYEE_ID);
+  await page.type(EMPLOYEE_ID, `${data.employee.id}\n`);
 
   // Open transaction
-  await page.waitForSelector('#transaction-id');
-  await page.type('#transaction-id', '2006\n');
+  await page.waitForSelector(TRANSACTION_ID);
+  await page.type(TRANSACTION_ID, '2006\n');
 
   // Fill form
-  await page.waitForSelector('[name="startDate"]');
-  await page.type('[name="startDate"]', data.leave.startDate);
-  await page.type('[name="endDate"]', data.leave.endDate);
+  await page.waitForSelector(START_DATE_INPUT);
+  await page.type(START_DATE_INPUT, data.leave.startDate);
+  await page.type(END_DATE_INPUT, data.leave.endDate);
 
   // Save and submit
   await page.click('button'); // FIXME

@@ -1,0 +1,12 @@
+export const OPEN_ATTACHMENT_SELECTOR = '.open-attachment:nth-child(1)';
+export const IMAGE_VIEWER_OVERLAY = '#image-viewer-overlay';
+export const EMPLOYEE_ID = '#employee-id';
+export const TRANSACTION_ID = '#transaction-id';
+export const START_DATE_INPUT = '[name="startDate"]';
+export const END_DATE_INPUT = '[name="endDate"]';
+export const MEMBER_TYPE = '[name="memberType"]';
+export const FIRST_NAME = '[name="firstName"]';
+export const LAST_NAME = '[name="lastName"]';
+export const BIRTH_DATE = '[name="birthDate"]';
+export const BIRTH_NAME = '[name="birthName"]';
+export const REFERENCE_PERSON_NUMBER = '[name="referencePersonNumber"]';
